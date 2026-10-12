@@ -24,7 +24,7 @@ export default function UploadPage() {
         const id = makeId();
 
         const validation = validateFile(file);
-        if (!validation.valid) {
+        if (!validation.ok) {
           addUpload({
             id,
             name: file.name,
