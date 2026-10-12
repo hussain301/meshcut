@@ -1,0 +1,23 @@
+name: Unpack site.zip
+on:
+  push:
+    paths:
+      - 'meshcut-site.zip'
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack site.zip
+        run: |
+          unzip -o meshcut-site.zip
+          rm meshcut-site.zip
+      - name: Commit unpacked files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Unpack site.zip"
+          git push
